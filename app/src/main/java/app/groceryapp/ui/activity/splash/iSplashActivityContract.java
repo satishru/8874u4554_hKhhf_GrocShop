@@ -1,0 +1,1 @@
+package app.groceryapp.ui.activity.splash;import app.groceryapp.ui.base.BaseNavigator;public interface iSplashActivityContract {  interface iSplashNavigator extends BaseNavigator {  }  interface iSplashViewModel {  }}

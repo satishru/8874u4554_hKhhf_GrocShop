@@ -1,0 +1,1 @@
+package app.groceryapp.utils.constants;public final class ApiConstants {    private ApiConstants() {        // This utility class is not publicly instantiable    }    public static final String API_KEY = "api_key";}

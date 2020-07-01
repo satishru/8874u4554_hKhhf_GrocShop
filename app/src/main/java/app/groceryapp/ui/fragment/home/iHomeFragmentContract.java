@@ -1,0 +1,1 @@
+package app.groceryapp.ui.fragment.home;import app.groceryapp.ui.base.BaseNavigator;public interface iHomeFragmentContract {    interface iHomeFragmentNavigator extends BaseNavigator {    }    interface iHomeFragmentViewModel {    }}
