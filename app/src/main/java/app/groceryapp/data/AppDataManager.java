@@ -11,8 +11,8 @@ import javax.inject.Singleton;
 
 import app.groceryapp.data.local.db.DbHelper;
 import app.groceryapp.data.local.prefs.PreferencesHelper;
-import app.groceryapp.data.model.api.request.BaseRequest;
 import app.groceryapp.data.model.api.response.category.CategoryResponse;
+import app.groceryapp.data.model.api.response.product.ProductResponse;
 import app.groceryapp.data.remote.ApiHeader;
 import app.groceryapp.data.remote.ApiHelper;
 import io.reactivex.Single;
@@ -35,13 +35,13 @@ public class AppDataManager extends PreAppDataManager {
     }
 
     @Override
-    public Single<Object> getPayeeDataApiCall(BaseRequest request) {
-        return mApiHelper.getPayeeDataApiCall(request);
+    public Single<CategoryResponse> getCategory(Map<String, String> params) {
+        return mApiHelper.getCategory(params);
     }
 
     @Override
-    public Single<CategoryResponse> getCategory(Map<String, String> params) {
-        return mApiHelper.getCategory(params);
+    public Single<ProductResponse> getProducts(Map<String, String> params) {
+        return mApiHelper.getProducts(params);
     }
     /* ApiHelper Call Backs Ends */
 }

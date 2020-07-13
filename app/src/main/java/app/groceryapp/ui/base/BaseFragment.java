@@ -6,26 +6,23 @@ import android.os.Bundle;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.inject.Inject;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import app.groceryapp.ViewModelProviderFactory;
-import dagger.android.support.AndroidSupportInjection;
 
 public abstract class BaseFragment<V extends BaseViewModel<?>> extends Fragment implements
     BaseNavigator {
 
-    @Inject
-    public ViewModelProviderFactory factory;
+    /*@Inject
+    public ViewModelProviderFactory factory;*/
 
     private BaseActivity<?> mActivity;
 
     public abstract void setViewModel();
+
     public abstract void setNavigator();
 
     @Override
@@ -42,12 +39,14 @@ public abstract class BaseFragment<V extends BaseViewModel<?>> extends Fragment 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         performDependencyInjection();
         super.onCreate(savedInstanceState);
+        setViewModel();
+        setNavigator();
         setHasOptionsMenu(false);
     }
 
     @SuppressWarnings("unchecked")
     protected ViewModel prepareViewModel(@NonNull Class viewModelCall) {
-      return new ViewModelProvider(this, factory).get(viewModelCall);
+        return new ViewModelProvider(this, getBaseActivity().getFactory()).get(viewModelCall);
     }
 
     @Override

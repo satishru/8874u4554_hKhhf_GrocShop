@@ -15,7 +15,7 @@ import timber.log.Timber;
 
 @Module
 public class NetworkModule {
-    private final static String BASE_URL = BuildConfig.BASE_URL;
+    private final static String BASE_URL = "http://192.168.0.105/PROJECTS/GROCERY/Ecom/";//BuildConfig.BASE_URL;
     private static Retrofit retrofit = null;
 
     @Provides

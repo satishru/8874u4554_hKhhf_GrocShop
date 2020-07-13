@@ -90,10 +90,4 @@ public abstract class BaseViewModel<N> extends ViewModel {
         ((BaseNavigator) getNavigator()).showErrorLayout("No internet", "Please check your internet connection and try again");
         return false;
     }
-
-    protected  Map<String, String> getBaseParams() {
-        Map<String, String> params =  new HashMap<>();
-        params.put(ApiConstants.API_KEY, BuildConfig.API_KEY);
-        return params;
-    }
 }

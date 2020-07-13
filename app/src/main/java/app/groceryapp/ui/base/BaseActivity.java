@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -28,6 +30,7 @@ import app.groceryapp.R;
 import app.groceryapp.ViewModelProviderFactory;
 import app.groceryapp.data.local.prefs.AppPreferencesHelper;
 import app.groceryapp.utils.NetworkUtils;
+import app.groceryapp.utils.ViewAnimationUtils;
 import app.groceryapp.utils.ViewUtils;
 import dagger.android.AndroidInjection;
 
@@ -42,8 +45,11 @@ public abstract class BaseActivity<V extends BaseViewModel<?>> extends AppCompat
     private ProgressDialog mProgressDialog;
 
     public abstract void setViewBinding();
+
     public abstract void setViewModel();
+
     public abstract void setNavigator();
+
     public abstract void handleErrorLayout(String errorTitle, String errorMessage);
 
     @Override
@@ -54,6 +60,10 @@ public abstract class BaseActivity<V extends BaseViewModel<?>> extends AppCompat
     public void onFragmentDetached(String tag) {
     }
 
+    public ViewModelProviderFactory getFactory() {
+        return factory;
+    }
+
     @SuppressWarnings("unchecked")
     protected ViewModel prepareViewModel(@NonNull Class viewModelCall) {
         return new ViewModelProvider(this, factory).get(viewModelCall);
@@ -61,6 +71,9 @@ public abstract class BaseActivity<V extends BaseViewModel<?>> extends AppCompat
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
         performDependencyInjection();
         super.onCreate(savedInstanceState);
         setOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -108,9 +121,30 @@ public abstract class BaseActivity<V extends BaseViewModel<?>> extends AppCompat
         }
     }
 
+    public void setToolBar(Toolbar toolBar, String title, boolean homeAsUpEnabled) {
+        setSupportActionBar(toolBar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(homeAsUpEnabled);
+        }
+    }
+
     public void setToolBarTitle(String title) {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
+        }
+    }
+
+    public void setCartCount(TextView view) {
+        if (view != null) {
+            int cartCount = 9;
+            if (cartCount > 9) {
+                view.setPadding(3, 1, 3, 1);
+            } else {
+                view.setPadding(12, 1, 12, 1);
+            }
+            view.setText(String.valueOf(cartCount));
+            ViewAnimationUtils.slideInFromRight(this, view);
         }
     }
 
@@ -244,5 +278,6 @@ public abstract class BaseActivity<V extends BaseViewModel<?>> extends AppCompat
     public void showErrorLayout(String errorTitle, String errorMessage) {
         handleErrorLayout(errorTitle, errorMessage);
     }
+
 }
 

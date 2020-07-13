@@ -1,0 +1,1 @@
+package app.groceryapp.ui.activity.product;import app.groceryapp.data.model.api.response.category.SubCategory;import app.groceryapp.ui.base.BaseNavigator;public class iProductListActivityContract {    interface iProductListActivityNavigator extends BaseNavigator {    }    interface iProductListActivityViewModel {    }}

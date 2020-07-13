@@ -1,8 +1,10 @@
 package app.groceryapp.di.builder;
 
 import app.groceryapp.ui.activity.main.MainActivity;
+import app.groceryapp.ui.activity.product.ProductListActivity;
 import app.groceryapp.ui.activity.splash.SplashActivity;
 import app.groceryapp.ui.fragment.home.HomeFragmentProvider;
+import app.groceryapp.ui.fragment.product.ProductListFragmentProvider;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -16,6 +18,11 @@ public abstract class ActivityBuilder {
         HomeFragmentProvider.class
     })
     abstract MainActivity bindMainActivity();
+
+    @ContributesAndroidInjector(modules = {
+        ProductListFragmentProvider.class
+    })
+    abstract ProductListActivity bindProductListActivity();
 
     /*
     @ContributesAndroidInjector(modules = HomeFragmentProvider.class)

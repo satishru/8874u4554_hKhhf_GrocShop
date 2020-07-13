@@ -2,10 +2,10 @@ package app.groceryapp.utils.constants;
 
 public final class BundleConstants {
     private BundleConstants() {
-        // This class is not publicly instantiable
     }
 
-    public static final String INTENT_IS_DEEP_LINK = "INTENT_IS_DEEP_LINK";
-    public static final String INTENT_DEEP_LINK_URL = "INTENT_DEEP_LINK_URL";
-    public static final String INTENT_IS_CHECK_VERSION = "INTENT_IS_CHECK_VERSION";
+    public static final String INTENT_CATEGORY = "INTENT_CATEGORY";
+    public static final String INTENT_SUB_CATEGORY = "INTENT_SUB_CATEGORY";
+    public static final String INTENT_CHILD_CATEGORY_POSITION= "INTENT_CHILD_CATEGORY_POSITION";
+
 }
